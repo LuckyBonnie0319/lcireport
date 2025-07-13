@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LCI 선생님 관리 시스템</title>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8 font-sans">
+
+    <div class="w-full max-w-5xl mx-auto">
+        <main id="app-container">
+
+            <!-- Login View -->
+            <div id="login-view">
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-200/80 p-8 text-center max-w-md mx-auto">
+                    <div class="flex justify-center items-center mb-6">
+                        <div class="p-3 bg-blue-100 rounded-full">
+                            <i data-lucide="book-user" class="text-blue-600 h-8 w-8"></i>
+                        </div>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-800 mb-2">LCI 선생님 관리 시스템</h1>
+                    <p class="text-gray-500 mb-8">계정에 로그인하여 시스템에 접속하세요.</p>
+                    <form id="login-form" class="space-y-6 text-left">
+                        <div>
+                            <label for="id" class="block text-sm font-medium text-gray-700">아이디 (ID)</label>
+                            <input id="id" name="username" type="text" required value="teacher" class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-gray-700">비밀번호 (Password)</label>
+                            <input id="password" name="password" type="password" required value="1234" class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <button type="submit" class="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">로그인</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Dashboard View -->
+            <div id="dashboard-view" class="hidden">
+                 <div class="bg-white rounded-2xl shadow-lg border border-gray-200/80 p-8">
+                    <h1 class="text-3xl font-bold text-gray-800 mb-6">관리 대시보드</h1>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="dashboard-card" id="manage-academy">
+                            <i data-lucide="school" class="h-10 w-10 text-purple-500"></i>
+                            <h2 class="text-xl font-semibold mt-4">학원 관리</h2>
+                            <p class="text-gray-500 mt-1">반 및 학생 관리</p>
+                        </div>
+                        <div class="dashboard-card" id="manage-exams">
+                            <i data-lucide="file-text" class="h-10 w-10 text-blue-500"></i>
+                            <h2 class="text-xl font-semibold mt-4">시험 관리</h2>
+                            <p class="text-gray-500 mt-1">시험 생성 및 조회</p>
+                        </div>
+                        <div class="dashboard-card" id="view-reports">
+                            <i data-lucide="edit-3" class="h-10 w-10 text-green-500"></i>
+                            <h2 class="text-xl font-semibold mt-4">답안 입력</h2>
+                            <p class="text-gray-500 mt-1">학생별 시험 답안을 입력합니다.</p>
+                        </div>
+                    </div>
+                    <div id="dashboard-content" class="mt-8"></div>
+                </div>
+            </div>
+
+            <!-- Academy Management View -->
+            <div id="academy-management-view" class="hidden">
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-200/80 p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h1 class="text-3xl font-bold text-gray-800">학원 관리</h1>
+                        <button id="back-to-dashboard" class="btn-secondary">
+                            <i data-lucide="arrow-left" class="h-4 w-4 mr-2"></i>
+                            대시보드로 돌아가기
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Class Management Panel -->
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                                <i data-lucide="users" class="h-5 w-5 mr-2 text-indigo-500"></i>
+                                반 관리 (Class Management)
+                            </h2>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="new-class-name" class="block text-sm font-medium text-gray-700 mb-2">새 반 이름</label>
+                                    <div class="flex gap-2">
+                                        <input id="new-class-name" type="text" placeholder="반 이름을 입력하세요" class="flex-1 input-field">
+                                        <button id="add-class-btn" class="btn-primary">반 추가</button>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="text-sm font-medium text-gray-700 mb-2">등록된 반 목록</h3>
+                                    <div id="class-list" class="space-y-2 max-h-48 overflow-y-auto bg-white rounded-md p-3 border border-gray-200">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Student Management Panel -->
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                                <i data-lucide="user" class="h-5 w-5 mr-2 text-green-500"></i>
+                                학생 관리 (Student Management)
+                            </h2>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="new-student-name" class="block text-sm font-medium text-gray-700 mb-2">새 학생 이름</label>
+                                    <input id="new-student-name" type="text" placeholder="학생 이름을 입력하세요" class="w-full input-field">
+                                </div>
+                                
+                                <div>
+                                    <label for="student-class-select" class="block text-sm font-medium text-gray-700 mb-2">소속 반</label>
+                                    <select id="student-class-select" class="w-full input-field">
+                                        <option value="">반을 선택하세요</option>
+                                    </select>
+                                </div>
+                                
+                                <button id="add-student-btn" class="btn-primary w-full">학생 추가</button>
+                                
+                                <div>
+                                    <h3 class="text-sm font-medium text-gray-700 mb-2">등록된 학생 목록</h3>
+                                    <div id="student-list" class="space-y-2 max-h-48 overflow-y-auto bg-white rounded-md p-3 border border-gray-200">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exam Management View -->
+            <div id="exam-creation-view" class="hidden">
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-200/80 p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h1 class="text-3xl font-bold text-gray-800">시험 정보 관리</h1>
+                        <button id="exam-back-to-dashboard" class="btn-secondary">
+                            <i data-lucide="arrow-left" class="h-4 w-4 mr-2"></i>
+                            대시보드로 돌아가기
+                        </button>
+                    </div>
+
+                    <div class="bg-gray-50/80 rounded-xl p-6 border mb-8">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <i data-lucide="file-plus-2" class="h-5 w-5 mr-2 text-blue-500"></i>
+                            새 시험 생성
+                        </h2>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 text-blue-800 p-4 mb-6 rounded-r-lg" role="alert">
+                            <p class="text-sm"><strong>시험 생성 안내:</strong> 시험 정보(이름, 날짜, 반)를 입력하고, '문항 추가' 버튼을 눌러 각 문제의 유형과 정답을 설정하세요. 모든 정보를 입력한 후 '시험 저장' 버튼을 누르면 시험이 등록됩니다.</p>
+                        </div>
+                        <form id="exam-creation-form" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label for="exam-name" class="label-text">시험명</label>
+                                    <input id="exam-name" type="text" required class="input-field mt-1 w-full" placeholder="예: 3월 월말 평가">
+                                </div>
+                                <div>
+                                    <label for="exam-class-select" class="label-text">대상 반</label>
+                                    <select id="exam-class-select" required class="input-field mt-1 w-full">
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="exam-date" class="label-text">시험 날짜</label>
+                                    <input id="exam-date" type="date" required class="input-field mt-1 w-full">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="exam-file-upload" class="label-text">시험지 파일 (선택 사항)</label>
+                                <input id="exam-file-upload" type="file" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer">
+                            </div>
+
+                            <div class="border-t pt-6">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="text-lg font-medium text-gray-900">문항별 정답 입력</h3>
+                                    <button type="button" id="add-question-btn" class="btn-primary-sm">
+                                        <i data-lucide="plus" class="h-4 w-4 mr-1"></i>
+                                        문항 추가
+                                    </button>
+                                </div>
+                                <div id="questions-container" class="space-y-3 max-h-60 overflow-y-auto p-2 bg-gray-200/50 rounded-lg">
+                                </div>
+                            </div>
+
+                            <div class="pt-5 border-t flex justify-end">
+                                <button type="submit" class="btn-primary w-full sm:w-auto">시험 저장</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="bg-gray-50/80 rounded-xl p-6 border">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <i data-lucide="list-checks" class="h-5 w-5 mr-2 text-green-500"></i>
+                            저장된 시험 목록
+                        </h2>
+                        <div id="exam-list-container" class="space-y-3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Student Answer Input View -->
+            <div id="student-entry-view" class="hidden">
+                 <div class="bg-white rounded-2xl shadow-lg p-8">
+                    <h1 class="text-2xl font-bold text-gray-800 mb-2">답안 입력</h1>
+                    <p class="text-gray-600 mb-6" id="student-entry-header"></p>
+                    <form id="student-answer-form" class="space-y-6">
+                        <div id="answer-inputs-container" class="space-y-4 max-h-[50vh] overflow-y-auto p-2 bg-gray-50 rounded-lg"></div>
+                         <div class="pt-6 border-t flex justify-end gap-4">
+                            <button type="button" id="cancel-answer-entry" class="btn-secondary">취소</button>
+                            <button type="submit" class="btn-primary">답안 제출 및 리포트 생성</button>
+                        </div>
+                    </form>
+                 </div>
+            </div>
+
+            <!-- Report View -->
+            <div id="report-view" class="hidden">
+            </div>
+
+        </main>
+        <footer class="mt-8 text-center">
+            <p class="text-xs text-gray-400">&copy; 2025 LCI System. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>

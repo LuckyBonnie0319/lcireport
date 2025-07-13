@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap');
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.dashboard-card {
+    @apply bg-gray-50 p-6 rounded-lg border border-gray-200 text-center cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-blue-400 hover:-translate-y-1;
+}
+
+.input-field {
+    @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm;
+}
+
+.label-text {
+    @apply block text-sm font-medium text-gray-700;
+}
+
+.btn-primary {
+    @apply inline-flex items-center justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors;
+}
+
+.btn-secondary {
+    @apply inline-flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors;
+}
+
+.btn-danger {
+    @apply p-1 rounded-md text-gray-400 hover:bg-red-100 hover:text-red-600 transition-colors;
+}
+
+.btn-success {
+    @apply inline-flex items-center justify-center py-1.5 px-3 border border-transparent rounded-md shadow-sm text-xs font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors;
+}
+
+.report-body { font-family: 'Inter', sans-serif; }
+.report-body h1, .report-body h2, .report-body h3, .report-body h4 { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+.page-title {
+    font-size: 2rem; font-weight: 800; color: #1e40af; letter-spacing: -0.5px;
+}
+.page-subtitle {
+    font-size: 1.5rem; font-weight: 700; color: #1e3a8a; margin-top: 0.25rem;
+}
+.section-title {
+    font-size: 1.25rem; font-weight: 700; color: #1e293b; margin-bottom: 1rem;
+    padding-bottom: 0.5rem; border-bottom: 2px solid #f1f5f9;
+}
+
+#student-info .grid > div {
+    font-size: 0.95rem;
+}
+
+.chart-container-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    min-height: 250px;
+}
+
+.assessment-box {
+    padding: 1.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    background-color: #f8fafc;
+    height: 100%;
+    position: relative;
+}
+.assessment-subtitle {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.assessment-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #334155;
+}
+
+.editable-text {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #334155;
+    width: 100%;
+    min-height: 100px;
+    resize: vertical;
+    font-family: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.editable-text:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.edit-button {
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.edit-button:hover {
+    opacity: 1;
+}
+
+.strategy-item {
+    padding: 1.25rem;
+    background-color: #ffffff;
+    border-left: 4px solid #3b82f6;
+    border-radius: 0.25rem;
+    border-top: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    position: relative;
+}
+.strategy-item p {
+    white-space: pre-line;
+}
+
+.strategy-editable {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #334155;
+    width: 100%;
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
+    white-space: pre-line;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.strategy-editable:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.save-indicator {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background-color: #10b981;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.save-indicator.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media print {
+    body {
+        background-color: white !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    #app-container > div:not(#report-view), footer.text-center, .no-print, body > .w-full > main#app-container > div:not(#report-view) {
+        display: none !important;
+    }
+    
+    #report-view {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .report-body {
+        padding: 0 !important;
+        margin: 0 !important;
+        background-color: transparent !important;
+        width: 100%;
+    }
+
+    #report-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .report-page {
+        width: 210mm;
+        height: 297mm;
+        padding: 2cm;
+        box-sizing: border-box !important;
+        box-shadow: none !important;
+        border: none !important;
+        page-break-after: always;
+        overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    .report-page:last-child {
+        page-break-after: auto;
+    }
+    
+    .print-flex-container {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 2rem !important;
+    }
+
+    .print-flex-item:first-child { width: 45%; }
+    .print-flex-item:last-child { width: 55%; }
+    
+    .chart-container-wrapper {
+        margin: 0 auto;
+    }
+
+    .chart-container-wrapper img {
+       width: 100%;
+       height: auto;
+    }
+    
+    .page-title { font-size: 24pt !important; color: #1e40af !important; }
+    .page-subtitle { font-size: 18pt !important; color: #1e3a8a !important; }
+    .section-title { font-size: 14pt !important; margin-bottom: 0.75rem !important; }
+    .assessment-subtitle { font-size: 12pt !important; color: #1e293b !important; }
+    .assessment-text, p.text-xs, .strategy-item p { font-size: 10pt !important; line-height: 1.6 !important; color: #334155 !important; }
+    #student-info { font-size: 10pt !important; }
+    .assessment-box, .strategy-item { background-color: #f8fafc !important; }
+    header { border-color: #e2e8f0 !important; }
+    .strategy-item { border-left-color: #3b82f6 !important; }
+    
+    .edit-button, .btn-success, .save-indicator {
+        display: none !important;
+    }
+    
+    .editable-text, .strategy-editable {
+        border: none !important;
+        background-color: transparent !important;
+        padding: 0 !important;
+        resize: none !important;
+    }
+}
