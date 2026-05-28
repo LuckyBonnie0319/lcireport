@@ -87,6 +87,7 @@ export function setupDashboard() {
     const manageAcademyBtn = document.getElementById('manage-academy');
     const manageExamsBtn = document.getElementById('manage-exams');
     const viewReportsBtn = document.getElementById('view-reports');
+    const manageAutomationBtn = document.getElementById('manage-automation');
     const dashboardView = document.getElementById('dashboard-view');
 
     if (manageAcademyBtn) {

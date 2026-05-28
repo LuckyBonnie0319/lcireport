@@ -43,7 +43,7 @@
             <div id="dashboard-view" class="hidden">
                  <div class="bg-white rounded-2xl shadow-lg border border-gray-200/80 p-8">
                     <h1 class="text-3xl font-bold text-gray-800 mb-6">관리 대시보드</h1>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <div class="dashboard-card" id="manage-academy">
                             <i data-lucide="school" class="h-10 w-10 text-purple-500"></i>
                             <h2 class="text-xl font-semibold mt-4">학원 관리</h2>
@@ -53,6 +53,12 @@
                             <i data-lucide="file-text" class="h-10 w-10 text-blue-500"></i>
                             <h2 class="text-xl font-semibold mt-4">시험 관리</h2>
                             <p class="text-gray-500 mt-1">시험 생성 및 조회</p>
+                        </div>
+
+                        <div class="dashboard-card" id="manage-automation">
+                            <i data-lucide="bot" class="h-10 w-10 text-amber-500"></i>
+                            <h2 class="text-xl font-semibold mt-4">시장 자동화</h2>
+                            <p class="text-gray-500 mt-1">미국→한국 루틴 자동 실행</p>
                         </div>
                         <div class="dashboard-card" id="view-reports">
                             <i data-lucide="edit-3" class="h-10 w-10 text-green-500"></i>
@@ -217,6 +223,9 @@
                     </form>
                  </div>
             </div>
+
+
+            <div id="market-automation-view" class="hidden"></div>
 
             <!-- Report View -->
             <div id="report-view" class="hidden">

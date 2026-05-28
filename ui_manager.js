@@ -1,4 +1,4 @@
-const views = ['login-view', 'dashboard-view', 'academy-management-view', 'exam-creation-view', 'student-entry-view', 'report-view'];
+const views = ['login-view', 'dashboard-view', 'academy-management-view', 'exam-creation-view', 'student-entry-view', 'report-view', 'market-automation-view'];
 
 export function showView(viewId) {
     views.forEach(id => {
@@ -11,9 +11,13 @@ export function showView(viewId) {
             }
         }
     });
-    const reportView = document.getElementById('report-view');
-    if (viewId !== 'report-view' && reportView) {
-        reportView.innerHTML = '';
+
+    if (viewId !== 'report-view') {
+        const reportView = document.getElementById('report-view');
+        if (reportView) {
+            reportView.innerHTML = '';
+        }
     }
+
     window.scrollTo(0, 0);
 }
