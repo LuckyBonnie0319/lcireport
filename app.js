@@ -4,6 +4,7 @@ import { setupDashboard } from './dashboard_controller.js';
 import { setupExamCreation } from './exam_controller.js';
 import { setupAnswerEntry } from './answer_controller.js';
 import { setupAcademyManagement } from './academy_controller.js';
+import { setupAutomation } from './automation_controller.js';
 import { generateReportFromSubmission } from './report_generator.js';
 import { addStudentAnswer } from './app_state.js';
 
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupExamCreation();
     setupAnswerEntry();
     setupAcademyManagement();
+    setupAutomation();
 
     window.navigateTo = showView;
     
